@@ -9,6 +9,9 @@ serialize dictionary using two lists one for keys and another one for values to 
 ## WaitForSecondsPool
 pooling UnityEngine.WaitForSeconds instances
 
+## BoundsExtension
+extended version of UnityEngine.Bounds
+
 ## DebugExtension
 extended version of UnityEngine.Debug
 
