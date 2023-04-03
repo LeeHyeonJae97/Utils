@@ -53,6 +53,12 @@ public static class Random
     public static UnityEngine.Random.State state => UnityEngine.Random.state;
     public static float value => UnityEngine.Random.value;
 
+    public static bool CheckPercent(int value)
+    {
+        // need to check
+        return Random.Range(0, 100) < value;
+    }
+
     public static Color ColorHSV()
     {
         return UnityEngine.Random.ColorHSV();
@@ -91,5 +97,5 @@ public static class Random
     public static float Range(float minInclusive, float maxInclusive)
     {
         return UnityEngine.Random.Range(minInclusive, maxInclusive);
-    }    
+    }
 }
