@@ -146,4 +146,14 @@ public static class VectorExtension
     {
         return new Vector3(Mathf.Clamp(vec.x, min.x, max.x), Mathf.Clamp(vec.y, min.y, max.y), Mathf.Clamp(vec.z, min.z, max.z));
     }
+
+    public static Vector2 Reflect(this Vector2 vec, Vector2 normal)
+    {
+        return vec + 2 * Vector2.Dot(vec * -1, normal.normalized) * normal;
+    }
+
+    public static Vector3 Reflect(this Vector3 vec, Vector3 normal)
+    {
+        return vec + 2 * Vector3.Dot(vec * -1, normal.normalized) * normal;
+    }
 }
