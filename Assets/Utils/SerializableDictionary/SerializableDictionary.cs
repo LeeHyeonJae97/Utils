@@ -15,7 +15,7 @@ public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IS
 
     public void OnAfterDeserialize()
     {
-        Clear();
+        this.Clear();
 
         foreach (var kvp in _kvps)
         {
