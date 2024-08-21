@@ -1,11 +1,12 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
 {
-    public List<KeyValuePair> kvps;
+    [SerializeField] private List<KeyValuePair> _kvps;
 
     public void OnBeforeSerialize()
     {
@@ -16,13 +17,13 @@ public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IS
     {
         this.Clear();
 
-        foreach (var kvp in kvps)
+        foreach (var kvp in _kvps)
         {
             this[kvp.key] = kvp.value;
         }
     }
 
-    [System.Serializable]
+    [Serializable]
     public struct KeyValuePair
     {
         public TKey key;
@@ -35,33 +36,46 @@ public class SerializableDictionaryDrawer : PropertyDrawer
 {
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
-        return EditorGUI.GetPropertyHeight(property.FindPropertyRelative("kvps"));
+        return EditorGUI.GetPropertyHeight(property.FindPropertyRelative("_kvps"));
     }
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
         EditorGUI.BeginProperty(position, label, property);
-        EditorGUI.PropertyField(position, property.FindPropertyRelative("kvps"), label, true);
+        EditorGUI.PropertyField(position, property.FindPropertyRelative("_kvps"), label, true);
         EditorGUI.EndProperty();
     }
 }
 
 public class SerializableDictionaryKeyValuePairDrawer : PropertyDrawer
 {
+    public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+    {
+        return Mathf.Max(
+            EditorGUI.GetPropertyHeight(property.FindPropertyRelative("key")),
+            EditorGUI.GetPropertyHeight(property.FindPropertyRelative("value"))
+        );
+    }
+
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        Rect rect1 = new Rect(position.x, position.y, position.width / 2 - 4, position.height);
-        Rect rect2 = new Rect(position.center.x + 2, position.y, position.width / 2 - 4, position.height);
+        var keyProp = property.FindPropertyRelative("key");
+        var keyHeight = EditorGUI.GetPropertyHeight(keyProp);
+        var keyRect = new Rect(position.x, position.y, position.width / 2 - 4, keyHeight);
 
-        EditorGUI.PropertyField(rect1, property.FindPropertyRelative("key"), GUIContent.none);
-        EditorGUI.PropertyField(rect2, property.FindPropertyRelative("value"), GUIContent.none);
+        var valueProp = property.FindPropertyRelative("value");
+        var valueHeight = EditorGUI.GetPropertyHeight(valueProp);
+        var valueRect = new Rect(position.center.x + 2, position.y, position.width / 2 - 4, valueHeight);
+
+        EditorGUI.PropertyField(keyRect, keyProp, GUIContent.none);
+        EditorGUI.PropertyField(valueRect, valueProp, GUIContent.none);
     }
 }
 #endif
 
 #region Example
 
-[System.Serializable]
+[Serializable]
 public class AudioClipDictionary : SerializableDictionary<string, AudioClip>
 {
 
