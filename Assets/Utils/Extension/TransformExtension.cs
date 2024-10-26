@@ -2,118 +2,118 @@ using UnityEngine;
 
 public static class TransformExtension
 {
-    public static Transform SetPosition(this Transform tr, Vector3 position)
+    public static Transform SetPosition(this Transform transform, Vector3 position)
     {
-        tr.position = position;
+        transform.position = position;
         
-        return tr;
+        return transform;
     }
     
-    public static Transform SetPositionX(this Transform tr, float x)
+    public static Transform SetPositionX(this Transform transform, float x)
     {
-        tr.position = new Vector3(x, tr.position.y, tr.position.z);
+        transform.position = new Vector3(x, transform.position.y, transform.position.z);
         
-        return tr;
+        return transform;
     }
     
-    public static Transform SetPositionY(this Transform tr, float y)
+    public static Transform SetPositionY(this Transform transform, float y)
     {
-        tr.position = new Vector3(tr.position.x, y, tr.position.z);
+        transform.position = new Vector3(transform.position.x, y, transform.position.z);
         
-        return tr;
+        return transform;
     }
 
-    public static Transform SetPositionZ(this Transform tr, float z)
+    public static Transform SetPositionZ(this Transform transform, float z)
     {
-        tr.position = new Vector3(tr.position.x, tr.position.y, z);
+        transform.position = new Vector3(transform.position.x, transform.position.y, z);
 
-        return tr;
+        return transform;
     }
 
-    public static Transform SetLocalPosition(this Transform tr, Vector3 localPosition)
+    public static Transform SetLocalPosition(this Transform transform, Vector3 localPosition)
     {
-        tr.localPosition = localPosition;
+        transform.localPosition = localPosition;
 
-        return tr;
+        return transform;
     }
     
-    public static Transform SetLocalPositionX(this Transform tr, float localX)
+    public static Transform SetLocalPositionX(this Transform transform, float localX)
     {
-        tr.localPosition = new Vector3(localX, tr.localPosition.y, tr.localPosition.z);
+        transform.localPosition = new Vector3(localX, transform.localPosition.y, transform.localPosition.z);
         
-        return tr;
+        return transform;
     }
     
-    public static Transform SetLocalPositionY(this Transform tr, float localY)
+    public static Transform SetLocalPositionY(this Transform transform, float localY)
     {
-        tr.localPosition = new Vector3(tr.localPosition.x, localY, tr.localPosition.z);
+        transform.localPosition = new Vector3(transform.localPosition.x, localY, transform.localPosition.z);
         
-        return tr;
+        return transform;
     }
 
-    public static Transform SetLocalPositionZ(this Transform tr, float localZ)
+    public static Transform SetLocalPositionZ(this Transform transform, float localZ)
     {
-        tr.localPosition = new Vector3(tr.localPosition.x, tr.localPosition.y, localZ);
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, localZ);
 
-        return tr;
+        return transform;
     }
 
-    public static Transform SetRotation(this Transform tr, Quaternion rotation)
+    public static Transform SetRotation(this Transform transform, Quaternion rotation)
     {
-        tr.rotation = rotation;
+        transform.rotation = rotation;
 
-        return tr;
+        return transform;
     }
 
-    public static Transform SetLocalRotation(this Transform tr, Quaternion localRotation)
+    public static Transform SetLocalRotation(this Transform transform, Quaternion localRotation)
     {
-        tr.localRotation = localRotation;
+        transform.localRotation = localRotation;
 
-        return tr;
+        return transform;
     }
 
-    public static Transform SetLocalScale(this Transform tr, Vector3 localScale)
+    public static Transform SetLocalScale(this Transform transform, Vector3 localScale)
     {
-        tr.localScale = localScale;
+        transform.localScale = localScale;
 
-        return tr;
+        return transform;
     }
 
-    public static void SetParent(this Transform tr, Transform parent, Vector3 localPosition)
+    public static void SetParent(this Transform transform, Transform parent, Vector3 localPosition)
     {
-        tr.SetParent(parent);
-        tr.localPosition = localPosition;
+        transform.SetParent(parent);
+        transform.localPosition = localPosition;
     }
 
-    public static void SetParent(this Transform tr, Transform parent, Vector3 localPosition, Quaternion localRotation)
+    public static void SetParent(this Transform transform, Transform parent, Vector3 localPosition, Quaternion localRotation)
     {
-        tr.SetParent(parent);
-        tr.localPosition = localPosition;
-        tr.localRotation = localRotation;
+        transform.SetParent(parent);
+        transform.localPosition = localPosition;
+        transform.localRotation = localRotation;
     }
 
-    public static void SetParent(this Transform tr, Transform parent, Vector3 localPosition, Quaternion localRotation, Vector3 localScale)
+    public static void SetParent(this Transform transform, Transform parent, Vector3 localPosition, Quaternion localRotation, Vector3 localScale)
     {
-        tr.SetParent(parent);
-        tr.localPosition = localPosition;
-        tr.localRotation = localRotation;
-        tr.localScale = localScale;
+        transform.SetParent(parent);
+        transform.localPosition = localPosition;
+        transform.localRotation = localRotation;
+        transform.localScale = localScale;
     }
 
-    public static void MoveTowards(this Transform tr, Vector3 target, float speed)
+    public static void MoveTowards(this Transform transform, Vector3 target, float speed)
     {
-        tr.position = Vector3.MoveTowards(tr.position, target, speed);
+        transform.position = Vector3.MoveTowards(transform.position, target, speed);
     }
 
-    public static void RotateTowards(this Transform tr, Quaternion lookRotation, float speed)
+    public static void RotateTowards(this Transform transform, Quaternion lookRotation, float speed)
     {
-        tr.rotation = Quaternion.RotateTowards(tr.rotation, lookRotation, speed);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, speed);
     }
 
-    public static void RotateTowards(this Transform tr, Vector3 lookTarget, float speed)
+    public static void RotateTowards(this Transform transform, Vector3 lookTarget, float speed)
     {
-        var lookRotation = Quaternion.LookRotation(lookTarget - tr.position);
+        Quaternion lookRotation = Quaternion.LookRotation(lookTarget - transform.position);
 
-        tr.rotation = Quaternion.RotateTowards(tr.rotation, lookRotation, speed);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, speed);
     }
 }

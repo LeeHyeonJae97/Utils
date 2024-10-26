@@ -79,4 +79,13 @@ public static class RectTransformExtension
                 return Vector2.zero;
         }
     }
+
+    public static Vector3 GetLocalPositionWithPivot(this RectTransform rectTransform)
+    {
+        float pivotOffsetX = (0.5f - rectTransform.pivot.x) * rectTransform.rect.size.x;
+        float pivotOffSetY = (0.5f - rectTransform.pivot.y) * rectTransform.rect.size.y;
+        Vector3 pivotOffset = new Vector3(pivotOffsetX, pivotOffSetY, 0f);
+
+        return rectTransform.localPosition + pivotOffset;
+    }
 }

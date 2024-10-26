@@ -4,19 +4,18 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class Trigger2DEventHandler : MonoBehaviour
 {
-    [SerializeField] private LayerMask layerMask;
+    [SerializeField] private LayerMask _layerMask;
 
-    public Action<GameObject> OnEnter;
-    public Action<GameObject> OnExit;
-    public Action<GameObject> OnStay;
+    public event Action<GameObject> OnEnter;
+    public event Action<GameObject> OnExit;
+    public event Action<GameObject> OnStay;
 
     public LayerMask LayerMask
     {
-        get => layerMask;
-        set => layerMask = value;
+        get => _layerMask;
+        set => _layerMask = value;
     }
 
-    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (IsMasked(other.gameObject))
@@ -41,5 +40,5 @@ public class Trigger2DEventHandler : MonoBehaviour
         }
     }
 
-    private bool IsMasked(GameObject gameObject) => (gameObject.layer & layerMask.value) > 0;
+    private bool IsMasked(GameObject gameObject) => (gameObject.layer & _layerMask.value) > 0;
 }

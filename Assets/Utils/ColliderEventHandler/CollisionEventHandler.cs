@@ -4,18 +4,17 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class CollisionEventHandler : MonoBehaviour
 {
-    [SerializeField] private LayerMask layerMask;
-    
-    public Action<GameObject> OnEnter;
-    public Action<GameObject> OnExit;
-    public Action<GameObject> OnStay;
+    [SerializeField] private LayerMask _layerMask;
+
+    public event Action<GameObject> OnEnter;
+    public event Action<GameObject> OnExit;
+    public event Action<GameObject> OnStay;
 
     public LayerMask LayerMask
     {
-        get => layerMask;
-        set => layerMask = value;
+        get => _layerMask;
+        set => _layerMask = value;
     }
-    
     
     private void OnCollisionEnter(Collision other)
     {
@@ -41,5 +40,5 @@ public class CollisionEventHandler : MonoBehaviour
         }
     }
 
-    private bool IsMasked(GameObject gameObject) => (gameObject.layer & layerMask.value) > 0;
+    private bool IsMasked(GameObject gameObject) => (gameObject.layer & _layerMask.value) > 0;
 }
